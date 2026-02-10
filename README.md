@@ -1,6 +1,6 @@
-# Lighthouse Checker
+# Lighthouse Checker Skill
 
-A CLI tool and AI skill for running Google Lighthouse audits across websites. Automatically discovers pages via sitemap.xml and generates organized HTML reports with pass/fail classification.
+An AI skill for running Google Lighthouse audits across websites. Automatically discovers pages via sitemap.xml and generates organized HTML reports with pass/fail classification.
 
 ## Features
 
@@ -9,7 +9,7 @@ A CLI tool and AI skill for running Google Lighthouse audits across websites. Au
 - **Category filtering** - Run only Performance, Accessibility, Best Practices, or SEO
 - **Pass/Fail organization** - Reports sorted by score threshold
 - **Interactive HTML dashboard** - Summary with links to all reports
-- **AI Skill integration** - Works with Claude Code and other LLMs
+- **AI Skill** - Works with Claude Code and other LLMs
 
 ---
 
@@ -34,8 +34,6 @@ claude mcp add-skill /path/to/lighthouse-checker
 cp -r lighthouse-checker /your/project/.claude/skills/
 ```
 
-The skill will be automatically detected when you use trigger phrases like "check page speed" or "run lighthouse audit".
-
 ### Option 2: Install Globally (Symlink)
 
 ```bash
@@ -57,14 +55,141 @@ ln -s $(pwd)/scripts/check_lighthouse.sh /usr/local/bin/lighthouse-checker
 git clone https://github.com/YOUR_USERNAME/lighthouse-checker.git
 cd lighthouse-checker
 chmod +x scripts/check_lighthouse.sh
-
-# Lighthouse will auto-install on first run
-./scripts/check_lighthouse.sh -u https://example.com
 ```
 
 ---
 
-## Usage
+## AI Prompts
+
+Once installed, you can use natural language prompts to trigger the skill. The skill will be automatically detected when you use these phrases.
+
+### Full Website Audit
+
+Audit an entire website by crawling its sitemap:
+
+| Prompt | Description |
+|--------|-------------|
+| "Check page speed for https://example.com" | Runs full Lighthouse audit on all pages found in sitemap |
+| "Run a lighthouse audit on https://example.com" | Same as above - audits entire site |
+| "Audit website https://example.com" | Comprehensive audit of all categories |
+| "Test website performance for https://example.com" | Full site audit with focus on performance |
+| "Generate lighthouse report for https://example.com" | Creates HTML reports for all discovered pages |
+| "Analyze https://example.com for page speed issues" | Identifies performance bottlenecks across the site |
+| "Check Core Web Vitals for https://example.com" | Audits LCP, FID, CLS metrics site-wide |
+
+### Single Page Audit
+
+Audit a specific page without crawling the sitemap:
+
+| Prompt | Description |
+|--------|-------------|
+| "Check lighthouse score for https://example.com/about" | Audits only the /about page |
+| "Audit this page: https://example.com/contact" | Single page audit with all categories |
+| "Run performance test on https://example.com/pricing" | Tests one specific page |
+| "Check https://example.com/blog/my-post for accessibility" | Single page accessibility check |
+| "How fast is https://example.com/products loading?" | Performance audit for one page |
+| "Test https://example.com/checkout page speed" | Audit checkout page performance |
+
+### Accessibility Audits
+
+Focus specifically on accessibility (WCAG compliance):
+
+| Prompt | Description |
+|--------|-------------|
+| "Check accessibility for https://example.com" | Full site accessibility audit |
+| "Run a11y check on https://example.com" | Same as above using shorthand |
+| "Check WCAG compliance for https://example.com" | Audits against WCAG guidelines |
+| "Is https://example.com accessible?" | Accessibility score and issues |
+| "Find accessibility issues on https://example.com" | Lists a11y violations |
+| "Check screen reader compatibility for https://example.com" | Focuses on assistive technology support |
+| "Audit https://example.com for accessibility violations" | Detailed a11y issue report |
+| "Does https://example.com/signup meet accessibility standards?" | Single page a11y check |
+
+### Performance Audits
+
+Focus specifically on speed and Core Web Vitals:
+
+| Prompt | Description |
+|--------|-------------|
+| "Test performance of https://example.com" | Performance-only audit |
+| "Check Core Web Vitals for https://example.com" | LCP, FID, CLS metrics |
+| "Analyze site speed for https://example.com" | Detailed speed analysis |
+| "Why is https://example.com slow?" | Identifies performance bottlenecks |
+| "Check load time for https://example.com" | Time-to-interactive metrics |
+| "Run performance audit on https://example.com" | Full perf category audit |
+| "How can I speed up https://example.com?" | Performance recommendations |
+| "Check render blocking resources on https://example.com" | Specific perf issue |
+
+### SEO Audits
+
+Focus specifically on search engine optimization:
+
+| Prompt | Description |
+|--------|-------------|
+| "Check SEO score for https://example.com" | SEO-only audit |
+| "Audit SEO for https://example.com" | Full SEO category check |
+| "Is https://example.com SEO optimized?" | SEO score and issues |
+| "Check meta tags on https://example.com" | SEO metadata audit |
+| "Find SEO issues on https://example.com" | Lists SEO violations |
+| "Is https://example.com mobile friendly?" | Mobile SEO check |
+| "Check https://example.com crawlability" | Search engine crawl audit |
+| "How can I improve SEO for https://example.com?" | SEO recommendations |
+
+### Best Practices Audits
+
+Focus on security, modern APIs, and code quality:
+
+| Prompt | Description |
+|--------|-------------|
+| "Check best practices for https://example.com" | Best practices audit |
+| "Run bp check on https://example.com" | Same using shorthand |
+| "Check security issues on https://example.com" | Security-focused audit |
+| "Does https://example.com use HTTPS?" | Security check |
+| "Find console errors on https://example.com" | JavaScript error detection |
+| "Check https://example.com for deprecated APIs" | Modern standards audit |
+| "Is https://example.com using modern web practices?" | Full BP category |
+
+### Multi-Category Audits
+
+Combine multiple categories in one audit:
+
+| Prompt | Description |
+|--------|-------------|
+| "Check performance and SEO for https://example.com" | Two categories |
+| "Run accessibility and best practices audit on https://example.com" | a11y + bp |
+| "Test a11y and performance for https://example.com" | Using shorthand |
+| "Check perf, seo, and a11y for https://example.com" | Three categories |
+| "Audit https://example.com for performance and accessibility" | perf + a11y |
+| "Run SEO and best practices check on https://example.com" | seo + bp |
+
+### Advanced Options
+
+Customize the audit with specific parameters:
+
+| Prompt | Description |
+|--------|-------------|
+| "Audit https://example.com with 80% pass threshold" | Custom pass/fail threshold |
+| "Check https://example.com, max 20 pages" | Limit sitemap crawl |
+| "Run lighthouse on https://example.com, save to ./my-reports" | Custom output directory |
+| "Audit https://example.com with 70% threshold and max 10 pages" | Multiple options |
+| "Check top 5 pages of https://example.com for performance" | Limited crawl + category |
+| "Quick audit of https://example.com (5 pages only)" | Fast limited check |
+| "Full deep audit of https://example.com (100 pages)" | Extended crawl |
+
+### Comparative & Follow-up Prompts
+
+| Prompt | Description |
+|--------|-------------|
+| "Re-run the lighthouse audit" | Repeat last audit |
+| "Check if https://example.com improved" | Compare to previous run |
+| "Show me the failed pages from the last audit" | Review failures |
+| "What pages failed accessibility?" | Filter by category failure |
+| "Open the lighthouse summary report" | View generated dashboard |
+| "Which pages have the lowest performance scores?" | Analyze results |
+
+---
+
+## Script Usage
 
 ### Basic Commands
 
@@ -102,7 +227,7 @@ Options:
   -p    Pass threshold 0-100 (default: 90)
 ```
 
-### Examples
+### Script Examples
 
 ```bash
 # All categories, entire site
@@ -120,29 +245,6 @@ Options:
 # Custom threshold and limit
 ./scripts/check_lighthouse.sh -u https://mysite.com -m 20 -p 80
 ```
-
----
-
-## AI Skill Integration
-
-### For Claude Code
-
-The `SKILL.md` file defines this tool as a skill. When installed, Claude Code will automatically invoke it for relevant requests.
-
-**Trigger phrases:**
-- "Check page speed for https://example.com"
-- "Run a lighthouse audit on my website"
-- "Check accessibility of this page"
-- "Test website performance"
-- "Audit this site for SEO"
-
-### For Other LLMs
-
-Include the `SKILL.md` content in your system prompt or tool definitions. The skill provides:
-
-1. **Tool definition** with triggers and description
-2. **Command syntax** for all operations
-3. **Examples** for common use cases
 
 ---
 

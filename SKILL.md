@@ -1,5 +1,5 @@
 ---
-name: lighthouse-checker
+name: Lighthouse Checker Skill
 description: Run Google Lighthouse audits on websites to check performance, accessibility, best practices, and SEO. Use when users ask to audit websites, check page speed, test accessibility, analyze Core Web Vitals, or generate Lighthouse reports.
 triggers:
   - check page speed
