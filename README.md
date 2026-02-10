@@ -21,40 +21,45 @@ An AI skill for running Google Lighthouse audits across websites. Automatically 
 - **Python 3** (for score parsing)
 - **Chrome/Chromium** browser
 
-### Option 1: Install as Claude Code Skill
+### Step 1: Clone the Repository
 
 ```bash
-# Clone the repository
 git clone https://github.com/YOUR_USERNAME/lighthouse-checker.git
+```
 
-# Add to Claude Code as a skill
+### Step 2: Make Executable
+
+```bash
+cd lighthouse-checker
+chmod +x scripts/check_lighthouse.sh
+```
+
+### Step 3: Choose Installation Method
+
+**Option A: Install as Claude Code Skill**
+
+```bash
 claude mcp add-skill /path/to/lighthouse-checker
+```
 
-# Or add the skill directory to your project
+Or copy to your project's skills folder:
+
+```bash
 cp -r lighthouse-checker /your/project/.claude/skills/
 ```
 
-### Option 2: Install Globally (Symlink)
+**Option B: Install Globally (Symlink)**
 
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/lighthouse-checker.git
-cd lighthouse-checker
-
-# Make executable
-chmod +x scripts/check_lighthouse.sh
-
-# Symlink to PATH (optional)
 ln -s $(pwd)/scripts/check_lighthouse.sh /usr/local/bin/lighthouse-checker
 ```
 
-### Option 3: Direct Usage
+**Option C: Direct Usage**
+
+Run directly from the cloned directory:
 
 ```bash
-# Clone and run directly
-git clone https://github.com/YOUR_USERNAME/lighthouse-checker.git
-cd lighthouse-checker
-chmod +x scripts/check_lighthouse.sh
+./scripts/check_lighthouse.sh -u https://example.com
 ```
 
 ---
