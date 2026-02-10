@@ -21,46 +21,48 @@ An AI skill for running Google Lighthouse audits across websites. Automatically 
 - **Python 3** (for score parsing)
 - **Chrome/Chromium** browser
 
-### Step 1: Clone the Repository
+### For Claude Code
+
+Add the skill directly from GitHub:
+
+```bash
+claude mcp add-skill https://github.com/YOUR_USERNAME/lighthouse-checker
+```
+
+The skill is now available and will be triggered automatically when you use relevant prompts.
+
+### For Other LLMs (ChatGPT, Gemini, etc.)
+
+**Option 1: System Prompt Integration**
+
+Copy the contents of `SKILL.md` into your LLM's system prompt or custom instructions. This gives the LLM knowledge of the skill's capabilities and command syntax.
+
+**Option 2: Tool/Function Definition**
+
+Add as a tool definition in your LLM configuration:
+
+```json
+{
+  "name": "lighthouse_checker",
+  "description": "Run Google Lighthouse audits on websites for performance, accessibility, best practices, and SEO",
+  "parameters": {
+    "url": "URL to audit (required)",
+    "categories": "perf, a11y, bp, seo (optional, comma-separated)",
+    "max_urls": "Maximum pages to crawl (optional, default: 50)",
+    "threshold": "Pass threshold 0-100 (optional, default: 90)"
+  }
+}
+```
+
+**Option 3: Local Setup**
+
+Clone the repository and reference it in your LLM's workspace:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/lighthouse-checker.git
 ```
 
-### Step 2: Make Executable
-
-```bash
-cd lighthouse-checker
-chmod +x scripts/check_lighthouse.sh
-```
-
-### Step 3: Choose Installation Method
-
-**Option A: Install as Claude Code Skill**
-
-```bash
-claude mcp add-skill /path/to/lighthouse-checker
-```
-
-Or copy to your project's skills folder:
-
-```bash
-cp -r lighthouse-checker /your/project/.claude/skills/
-```
-
-**Option B: Install Globally (Symlink)**
-
-```bash
-ln -s $(pwd)/scripts/check_lighthouse.sh /usr/local/bin/lighthouse-checker
-```
-
-**Option C: Direct Usage**
-
-Run directly from the cloned directory:
-
-```bash
-./scripts/check_lighthouse.sh -u https://example.com
-```
+Then instruct your LLM to use the script at `scripts/check_lighthouse.sh` when website auditing is requested.
 
 ---
 
