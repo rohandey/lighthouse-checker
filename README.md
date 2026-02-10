@@ -26,7 +26,7 @@ An AI skill for running Google Lighthouse audits across websites. Automatically 
 Add the skill directly from GitHub:
 
 ```bash
-claude mcp add-skill https://github.com/YOUR_USERNAME/lighthouse-checker
+claude mcp add-skill https://github.com/rohandey/lighthouse-checker-skill
 ```
 
 The skill is now available and will be triggered automatically when you use relevant prompts.
@@ -59,7 +59,7 @@ Add as a tool definition in your LLM configuration:
 Clone the repository and reference it in your LLM's workspace:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/lighthouse-checker.git
+git clone https://github.com/rohandey/lighthouse-checker-skill.git
 ```
 
 Then instruct your LLM to use the script at `scripts/check_lighthouse.sh` when website auditing is requested.
