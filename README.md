@@ -23,10 +23,16 @@ An AI skill for running Google Lighthouse audits across websites. Automatically 
 
 ### For Claude Code
 
-Add the skill directly from GitHub:
+Clone the skill into your project's `.claude/skills/` directory:
 
 ```bash
-claude mcp add-skill https://github.com/rohandey/lighthouse-checker-skill
+git clone https://github.com/rohandey/lighthouse-checker-skill.git .claude/skills/lighthouse-checker
+```
+
+Or add to your home directory for global access:
+
+```bash
+git clone https://github.com/rohandey/lighthouse-checker-skill.git ~/.claude/skills/lighthouse-checker
 ```
 
 The skill is now available and will be triggered automatically when you use relevant prompts.
